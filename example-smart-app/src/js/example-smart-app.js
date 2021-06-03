@@ -1,5 +1,4 @@
-(function(window){
-  window.extractData = function() {
+var extractData = function() {
     var ret = $.Deferred();
 
     function onError() {
@@ -70,9 +69,9 @@
     FHIR.oauth2.ready(onReady, onError);
     return ret.promise();
 
-  };
+};
 
-  function defaultPatient(){
+function defaultPatient(){
     return {
       fname: {value: ''},
       lname: {value: ''},
@@ -84,9 +83,9 @@
       ldl: {value: ''},
       hdl: {value: ''},
     };
-  }
+}
 
-  function getBloodPressureValue(BPObservations, typeOfPressure) {
+function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
     BPObservations.forEach(function(observation){
       var BP = observation.component.find(function(component){
@@ -101,20 +100,20 @@
     });
 
     return getQuantityValueAndUnit(formattedBPObservations[0]);
-  }
+}
 
-  function getQuantityValueAndUnit(ob) {
-    if (typeof ob != 'undefined' &&
-        typeof ob.valueQuantity != 'undefined' &&
-        typeof ob.valueQuantity.value != 'undefined' &&
-        typeof ob.valueQuantity.unit != 'undefined') {
-          return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
-    } else {
-      return undefined;
-    }
-  }
+function getQuantityValueAndUnit(ob) {
+	if (typeof ob != 'undefined' &&
+		typeof ob.valueQuantity != 'undefined' &&
+		typeof ob.valueQuantity.value != 'undefined' &&
+		typeof ob.valueQuantity.unit != 'undefined') {
+		  return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
+	} else {
+	  return undefined;
+	}
+}
 
-  window.drawVisualization = function(p) {
+var drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
     $('#fname').html(p.fname);
@@ -126,6 +125,4 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-  };
-
-})(window);
+};
